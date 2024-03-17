@@ -16,6 +16,7 @@ public class Piece {
 	public int col, row, preCol, preRow;
 	public int color;
 	public Piece hittingP;
+	public boolean moved;
 	
 	public Piece(int color, int col, int row) {
 		
@@ -68,6 +69,8 @@ public class Piece {
 		y = getY(row);
 		preCol = getCol(x);
 		preRow = getRow(y);
+		moved = true;		
+		
 	}
 	public void resetPosition() {
 		col = preCol;
@@ -129,7 +132,7 @@ public class Piece {
 			}
 		}
 		// WHen this piece is moving to the right
-		for(int c = preCol+1; c > targetCol; c++) {
+		for(int c = preCol+1; c < targetCol; c++) {
 			for(Piece piece : GamePanel.simPieces) {
 				if(piece.col == c && piece.row == targetRow) {
 					hittingP = piece;
@@ -173,7 +176,7 @@ public class Piece {
 			}
 			
 			// Up right
-			for(int c = preCol+1; c > targetCol; c++) {
+			for(int c = preCol+1; c < targetCol; c++) {
 				int diff = Math.abs(c - preCol);
 				for(Piece piece : GamePanel.simPieces) {
 					if(piece.col == c && piece.row == preRow - diff) {
